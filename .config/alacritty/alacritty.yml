@@ -1,7 +1,7 @@
 shell:
   program: /Windows/System32/wsl.exe
 # 
-working_directory: C:\Users
+working_directory: C:\
 
 # Background configuration
 window:
