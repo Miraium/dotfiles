@@ -12,7 +12,7 @@ if type -q exa
     alias eta 'exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
     alias lta eta
     alias l 'clear && ls'
- end
+end
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
