@@ -20,7 +20,6 @@ Copy setting files
 
 ```shell
 cp dotfiles/.vimrc ~/
-cp dotfiles/.tmux.conf ~/
 cp -r dotfiles/.config/ ~
 ```
 
