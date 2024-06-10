@@ -18,4 +18,5 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# Windows terminal Acylic Setting
 set LS_COLORS "ow=01;36"
