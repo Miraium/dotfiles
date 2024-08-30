@@ -2,7 +2,6 @@
 
 ## Tool list
 
-- Alacritty
 - Vim
 - tmux
 - fish
@@ -36,9 +35,3 @@ Launch Vim & Run following command at Vim.
 :PlugInstall
 ```
 
-## For Windows
-
-```
-mkdir /mnt/c/Users/<UserName>/AppData/Roaming/alacritty
-cp .config/alacritty/alacritty.yml /mnt/c/Users/<UserName>/AppData/Roaming/alacritty
-```
