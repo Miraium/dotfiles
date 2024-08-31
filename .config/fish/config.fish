@@ -1,17 +1,16 @@
-if type -q exa
+if type -q eza
     # https://zenn.dev/ryuu/articles/customize-your-terminal
-    alias e 'exa --icons --git'
-    alias l e
-    alias ls e
-    alias ea 'exa -a --icons --git'
-    alias la ea
-    alias ee 'exa -aahl --icons --git'
-    alias ll ee
-    alias et 'exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
-    alias lt et
-    alias eta 'exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
-    alias lta eta
-    alias l 'clear && ls'
+    alias ei="eza --icons --git"
+    alias ea="eza -a --icons --git"
+    alias ee="eza -aahl --icons --git"
+    alias et="eza -T -L 3 -a -I 'node_modules|.git|.cache' --icons"
+    alias eta="eza -T -a -I 'node_modules|.git|.cache' --color=always --icons | less -r"
+    alias ls=ei
+    alias la=ea
+    alias ll=ee
+    alias lt=et
+    alias lta=eta
+    alias l="clear && ls"
 end
 
 if status is-interactive
@@ -20,3 +19,7 @@ end
 
 # Windows terminal Acylic Setting
 set LS_COLORS "ow=01;36"
+
+source ~/.asdf/asdf.fish
+
+
