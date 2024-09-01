@@ -7,6 +7,8 @@ TmuxとFishを使用したシェル環境を提供します。Nordテーマを�
 さらに、Fishシェル上ではeza、z、fzfといったCLIツールを活用し、作業の生産性を向上させています。  
 Python環境の構築にはasdfとpoetryを利用しており、効率的なパッケージ管理が可能です。
 
+![screenshot.png](screenshot.png)
+
 ## インストール
 
 インストール手順については、[INSTALL.md](INSTALL.md)を参照してください。
@@ -24,3 +26,11 @@ Python環境の構築にはasdfとpoetryを利用しており、効率的なパ�
 - **eza**: [ezaの使い方](https://eza.rocks/)
 - **asdf**: [asdfの使い方](https://asdf-vm.com/)
 - **poetry**: [poetryの使い方](https://python-poetry.org/docs/)
+
+
+## 参考リンク
+
+このdotfilesはWindows Terminalでの使用を想定しています。
+Windows Terminalの設定については、以下のリポジトリに公開しています。
+
+https://github.com/Miraium/windows-terminal-setting
