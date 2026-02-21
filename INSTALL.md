@@ -1,71 +1,61 @@
 # Install
 
-## Font
+## Prerequisites
 
-アイコンフォントが必要なため、Bizin Gothic NFを使っています。
-ターミナルのフォントに設定しています。（Windows Terminalを使用）
+- Ubuntu / WSL2(Ubuntu) / macOS
+- `git`
+- Nerd Font (推奨: Bizin Gothic NF)
 
-Bizin Gothic NF
-(https://github.com/yuru7/bizin-gothic)[https://github.com/yuru7/bizin-gothic]
+## Clone
 
-
-## Install Commands
-
-'''shell
-sudo apt update
-sudo apt upgrade
-
-# インストールの前提として使用するパッケージ
-sudo apt install -y curl git wget
-# apt-add-repositoryコマンド用
-sudo apt install software-properties-common
-
-# dotfilesのクローン、.configなどへの配置
-cd ~/
+```bash
+cd ~
 git clone https://github.com/Miraium/dotfiles.git
-cp dotfiles/.vimrc ~/
-cp -r dotfiles/.config/ ~
+cd dotfiles
+```
 
-# tmux vim fishのインストール
-sudo apt-add-repository ppa:fish-shell/release-3
-sudo apt install -y tmux vim fish
+## Bootstrap (Recommended)
 
-# Vim-Plugインストールとプラグインのインストール
-# (参考) CLIでのVim-Plugのインストールについて https://github.com/junegunn/vim-plug/issues/675
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim +'PlugInstall --sync' +qa
+```bash
+./scripts/bootstrap.sh
+```
 
-# ezaのインストール
-sudo apt update
-sudo apt install -y gpg
-sudo mkdir -p /etc/apt/keyrings
-wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
-echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
-sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
-sudo apt update
-sudo apt install -y eza
+このコマンドは以下を実行します。
 
-# fzfのインストール
-sudo apt -y install fzf
+- OS別の依存導入 (`apt` / `brew`)
+- 既存設定のバックアップ
+- `stow` による設定反映
+- `uv` と Neovim(LazyVim) 初期化
+- 最低限の動作検証
 
-# asdfのインストール
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
+## Manual Steps
 
-# Fish環境に入って作業
-tmux
+### 1. Install dependencies only
 
-# Fisher & Pluign
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-fisher install jethrokuan/z
-fisher install jethrokuan/fzf
+```bash
+./scripts/install-deps.sh
+```
 
-# asdfを使ってPython, Poetryをインストール
-sudo apt update
-sudo apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl git libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-asdf plugin-add poetry
-asdf plugin-add python
-asdf install poetry latest
-asdf install python latest
-asdf global poetry latest
-asdf global python latest
-'''
+### 2. Deploy dotfiles with Stow
+
+```bash
+stow --target="$HOME" --restow home
+```
+
+### 3. Setup tools
+
+```bash
+./scripts/setup-tools.sh
+```
+
+### 4. Verify
+
+```bash
+./scripts/verify.sh
+```
+
+## Notes
+
+- WSL2 ではフォント設定を Windows 側のターミナルで行ってください。
+- WezTerm 設定は `home/.config/wezterm/wezterm.lua` にあります。
+- Windows Terminal は継続利用できます。

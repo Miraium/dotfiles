@@ -1,5 +1,4 @@
 if type -q eza
-    # https://zenn.dev/ryuu/articles/customize-your-terminal
     alias ei="eza --icons --git"
     alias ea="eza -a --icons --git"
     alias ee="eza -aahl --icons --git"
@@ -13,13 +12,12 @@ if type -q eza
     alias l="clear && ls"
 end
 
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
-
-# Windows terminal Acylic Setting
 set LS_COLORS "ow=01;36"
 
-source ~/.asdf/asdf.fish
+if type -q zoxide
+    zoxide init fish | source
+end
 
-
+if type -q starship
+    starship init fish | source
+end

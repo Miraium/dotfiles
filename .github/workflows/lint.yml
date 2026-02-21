@@ -1,0 +1,29 @@
+name: lint
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install linters
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck shfmt npm
+          sudo npm install -g markdownlint-cli
+
+      - name: Shellcheck
+        run: shellcheck scripts/*.sh
+
+      - name: Shfmt
+        run: shfmt -d scripts/*.sh
+
+      - name: Markdownlint
+        run: markdownlint README.md INSTALL.md
