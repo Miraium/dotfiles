@@ -3,7 +3,7 @@ set -euo pipefail
 
 export PATH="$HOME/.local/bin:$PATH"
 
-required_commands=(fish tmux nvim rg zoxide starship uv stow)
+required_commands=(fish tmux nvim rg zoxide starship uv stow unzip)
 optional_commands=(wezterm)
 
 is_wsl() {

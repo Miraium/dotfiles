@@ -1,3 +1,5 @@
+fish_add_path ~/.local/bin
+
 if type -q eza
     alias ei="eza --icons --git"
     alias ea="eza -a --icons --git"

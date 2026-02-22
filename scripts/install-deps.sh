@@ -34,6 +34,7 @@ install_ubuntu() {
     ripgrep \
     stow \
     tmux \
+    unzip \
     wget \
     zoxide
 
