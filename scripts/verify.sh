@@ -33,6 +33,7 @@ symlink_targets=(
   "$HOME/.config/nvim/init.lua"
   "$HOME/.config/wezterm/wezterm.lua"
   "$HOME/.config/starship.toml"
+  "$HOME/.config/tmux/plugins/tpm/tpm"
 )
 
 for target in "${symlink_targets[@]}"; do

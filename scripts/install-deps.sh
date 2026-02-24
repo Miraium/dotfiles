@@ -5,6 +5,44 @@ is_wsl() {
   grep -qi microsoft /proc/version 2>/dev/null
 }
 
+install_nvim_appimage() {
+  local arch appimage_name url tmpfile extract_dir install_dir
+  arch="$(uname -m)"
+  case "${arch}" in
+    x86_64|amd64)
+      appimage_name="nvim-linux-x86_64.appimage"
+      ;;
+    aarch64|arm64)
+      appimage_name="nvim-linux-arm64.appimage"
+      ;;
+    *)
+      echo "[warn] unsupported architecture for Neovim AppImage: ${arch}"
+      return
+      ;;
+  esac
+
+  url="https://github.com/neovim/neovim/releases/latest/download/${appimage_name}"
+  tmpfile="$(mktemp /tmp/nvim-appimage.XXXXXX)"
+  install_dir="$HOME/.local/opt/nvim-appimage"
+
+  curl -fL "${url}" -o "${tmpfile}"
+  chmod u+x "${tmpfile}"
+
+  extract_dir="$(mktemp -d /tmp/nvim-extract.XXXXXX)"
+  (
+    cd "${extract_dir}"
+    "${tmpfile}" --appimage-extract >/dev/null
+  )
+
+  rm -rf "${install_dir}"
+  mkdir -p "$(dirname "${install_dir}")"
+  mv "${extract_dir}/squashfs-root" "${install_dir}"
+  rm -rf "${extract_dir}" "${tmpfile}"
+
+  mkdir -p "$HOME/.local/bin"
+  ln -snf "${install_dir}/AppRun" "$HOME/.local/bin/nvim"
+}
+
 install_eza_apt_repo() {
   if command -v eza >/dev/null 2>&1; then
     return
@@ -30,7 +68,6 @@ install_ubuntu() {
     fzf \
     git \
     gpg \
-    neovim \
     ripgrep \
     stow \
     tmux \
@@ -50,15 +87,7 @@ install_ubuntu() {
     curl -sS https://starship.rs/install.sh | sh -s -- -y
   fi
 
-  local nvim_version nvim_minor
-  nvim_version="$(nvim --version | head -n1 | awk '{print $2}' | sed 's/^v//')"
-  nvim_minor="$(echo "${nvim_version}" | awk -F. '{print $2}')"
-  if [[ -z "${nvim_minor}" || "${nvim_minor}" -lt 8 ]]; then
-    echo "[info] Upgrading neovim via ppa:neovim-ppa/unstable for LazyVim compatibility."
-    sudo add-apt-repository -y ppa:neovim-ppa/unstable
-    sudo apt update
-    sudo apt install -y neovim
-  fi
+  install_nvim_appimage
 }
 
 install_macos() {
