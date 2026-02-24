@@ -7,6 +7,14 @@ if ! command -v uv >/dev/null 2>&1; then
   curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
 
+if command -v fish >/dev/null 2>&1; then
+  fish -c "type -q fisher; or curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+
+  if [[ -f "$HOME/.config/fish/fish_plugins" ]]; then
+    fish -c "fisher update"
+  fi
+fi
+
 if command -v nvim >/dev/null 2>&1; then
   nvim_version="$(nvim --version | head -n1 | awk '{print $2}' | sed 's/^v//')"
   nvim_minor="$(echo "${nvim_version}" | awk -F. '{print $2}')"

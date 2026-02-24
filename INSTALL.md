@@ -26,6 +26,7 @@ cd dotfiles
 - 既存設定のバックアップ
 - `stow` による設定反映
 - `uv` と Neovim(LazyVim) 初期化
+- fish plugin (`fisher`) の導入と `fish_plugins` 同期
 - 最低限の動作検証
 
 ## Manual Steps
